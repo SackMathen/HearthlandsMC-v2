@@ -1,0 +1,3 @@
+https://www.linuxnorth.org/minecraft/modded_linux.html#Step%201%20-%20Install%20Java
+https://www.google.com/search?q=forge+installer+linux&rlz=1C1RXQR_enUS1178US1178&oq=forge+installer+linux&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMggIAxAAGBYYHjIICAQQABgWGB4yCggFEAAYChgWGB4yCAgGEAAYFhgeMggIBxAAGBYYHjIICAgQABgWGB4yCAgJEAAYFhge0gEIMzI0MmowajeoAgCwAgA&sourceid=chrome&ie=UTF-8
+https://www.google.com/search?q=how+to+allow+a+service+through+tailscale&rlz=1C1RXQR_enUS1178US1178&oq=how+to+allow+a+service+through+tailscale&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRifBTIHCAUQIRifBTIHCAYQIRifBTIHCAcQIRifBTIHCAgQIRifBTIHCAkQIRifBdIBCDgyMjlqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8

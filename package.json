@@ -1,0 +1,22 @@
+{
+  "name": "hearthlands-lore-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for posting The Hearthlands Minecraft server lore as embeds",
+  "main": "lore-bot.js",
+  "scripts": {
+    "start": "node lore-bot.js",
+    "dev": "nodemon lore-bot.js"
+  },
+  "keywords": ["discord", "bot", "minecraft", "lore"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.0",
+    "@discordjs/rest": "^2.0.1",
+    "dotenv": "^16.3.1",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

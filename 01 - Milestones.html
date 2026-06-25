@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>01 - Milestones</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 720px; margin: 0 auto; }
+    h1 {
+      font-size: 1.8rem;
+      color: #4ecca3;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .subtitle {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+    .phase {
+      margin-bottom: 32px;
+    }
+    .phase-title {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #4ecca3;
+      border-bottom: 1px solid #2e2e4e;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    .milestone {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background: #16213e;
+      border: 1px solid #2e2e4e;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .milestone:hover { background: #1e2a50; border-color: #4ecca3; }
+    .milestone.done {
+      background: #0f2a1e;
+      border-color: #2a6b4a;
+      opacity: 0.75;
+    }
+    .milestone.done .label { text-decoration: line-through; color: #888; }
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border-radius: 4px;
+      border: 2px solid #4ecca3;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      transition: background 0.2s;
+    }
+    .milestone.done .checkbox {
+      background: #4ecca3;
+      border-color: #4ecca3;
+    }
+    .checkmark { display: none; color: #1a1a2e; font-size: 13px; font-weight: bold; }
+    .milestone.done .checkmark { display: block; }
+    .label { font-size: 0.95rem; line-height: 1.4; }
+    .note { font-size: 0.8rem; color: #888; margin-top: 3px; }
+    .progress-bar-wrap {
+      background: #16213e;
+      border-radius: 20px;
+      height: 10px;
+      margin-bottom: 30px;
+      overflow: hidden;
+      border: 1px solid #2e2e4e;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #4ecca3, #38b2ac);
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+    .progress-label {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>⛏ Minecraft Server Milestones</h1>
+  <p class="subtitle">Click any milestone to mark it complete. Progress saves automatically.</p>
+
+  <p class="progress-label" id="progress-label">0 of 0 completed</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+  </div>
+
+  <div id="milestones-root"></div>
+</div>
+
+<script>
+  const phases = [
+    {
+      title: "Phase 1 — Planning & Setup",
+      milestones: [
+        { id: "p1_1", label: "Choose a server name and branding", note: "Pick something memorable and relevant to your server identity" },
+        { id: "p1_2", label: "Decide on Minecraft edition (Java, Bedrock, or both via Geyser)", note: "" },
+        { id: "p1_3", label: "Choose and purchase a hosting plan", note: "Start with 2–4 GB RAM; scale as needed" },
+        { id: "p1_4", label: "Select target Minecraft version", note: "" },
+        { id: "p1_5", label: "Create a Discord server for the community", note: "Set up welcome channel, rules, and support channels" },
+      ]
+    },
+    {
+      title: "Phase 2 — Core Plugin Installation",
+      milestones: [
+        { id: "p2_1", label: "Install and configure Towny", note: "Set town costs, claim prices, and nation rules" },
+        { id: "p2_2", label: "Install Vault + EssentialsX (economy foundation)", note: "" },
+        { id: "p2_3", label: "Install a Jobs plugin", note: "Lets players earn currency to fund towns" },
+        { id: "p2_4", label: "Install Dynmap or BlueMap", note: "Live world map showing town claims — a huge visual hook for new players" },
+        { id: "p2_5", label: "Install a permissions plugin (LuckPerms)", note: "Required for rank management" },
+      ]
+    },
+    {
+      title: "Phase 3 — Monetization Setup",
+      milestones: [
+        { id: "p3_1", label: "Set up Tebex or CraftingStore storefront", note: "EULA-compliant payment platform" },
+        { id: "p3_2", label: "Define cosmetic ranks and perks to sell", note: "Chat colors, prefixes, particles, cosmetic items — no gameplay advantages" },
+        { id: "p3_3", label: "Set up donation/support tiers (voluntary)", note: "No access gating — purely optional" },
+        { id: "p3_4", label: "Link store to Discord (automatic role on purchase)", note: "" },
+      ]
+    },
+    {
+      title: "Phase 4 — Launch",
+      milestones: [
+        { id: "p4_1", label: "Run internal beta with friends / small group", note: "Stress-test plugins and economy balance" },
+        { id: "p4_2", label: "List server on Planet Minecraft", note: "" },
+        { id: "p4_3", label: "List server on Minecraft Server List (minecraft-server-list.com)", note: "" },
+        { id: "p4_4", label: "List server on TopG and Minecraft MP", note: "" },
+        { id: "p4_5", label: "Announce launch in relevant Reddit communities", note: "r/MinecraftBuddies, r/mcservers" },
+        { id: "p4_6", label: "Post launch content on social media (TikTok, YouTube Shorts)", note: "" },
+      ]
+    },
+    {
+      title: "Phase 5 — Growth & Retention",
+      milestones: [
+        { id: "p5_1", label: "Hit 10 concurrent players", note: "" },
+        { id: "p5_2", label: "Hit 25 registered players", note: "" },
+        { id: "p5_3", label: "Run first in-game event (build contest, PvP tournament, etc.)", note: "" },
+        { id: "p5_4", label: "First cosmetic store sale", note: "" },
+        { id: "p5_5", label: "Server costs fully covered by cosmetic revenue", note: "The real sustainability milestone" },
+        { id: "p5_6", label: "Hit 100 registered players", note: "" },
+        { id: "p5_7", label: "First active nation formed in Towny", note: "Sign that the community is thriving" },
+      ]
+    }
+  ];
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem('mc_milestones') || '{}'); } catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem('mc_milestones', JSON.stringify(state));
+  }
+
+  function updateProgress(state) {
+    const all = phases.flatMap(p => p.milestones);
+    const done = all.filter(m => state[m.id]).length;
+    const pct = Math.round((done / all.length) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-label').textContent = `${done} of ${all.length} completed (${pct}%)`;
+  }
+
+  function render() {
+    const state = loadState();
+    const root = document.getElementById('milestones-root');
+    root.innerHTML = '';
+
+    phases.forEach(phase => {
+      const phaseEl = document.createElement('div');
+      phaseEl.className = 'phase';
+
+      const title = document.createElement('div');
+      title.className = 'phase-title';
+      title.textContent = phase.title;
+      phaseEl.appendChild(title);
+
+      phase.milestones.forEach(m => {
+        const el = document.createElement('div');
+        el.className = 'milestone' + (state[m.id] ? ' done' : '');
+        el.innerHTML = `
+          <div class="checkbox"><span class="checkmark">✓</span></div>
+          <div>
+            <div class="label">${m.label}</div>
+            ${m.note ? `<div class="note">${m.note}</div>` : ''}
+          </div>
+        `;
+        el.addEventListener('click', () => {
+          const s = loadState();
+          s[m.id] = !s[m.id];
+          saveState(s);
+          render();
+        });
+        phaseEl.appendChild(el);
+      });
+
+      root.appendChild(phaseEl);
+    });
+
+    updateProgress(state);
+  }
+
+  render();
+</script>
+</body>
+</html>
